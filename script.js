@@ -4,7 +4,8 @@ const newQuoteBtn = document.querySelector('#new-quote');
 const twitterBtn = document.querySelector('#twitter');
 
 let apiQuotes = [];
-getQuotes();
+newYiyan();
+// getQuotes();
 
 // 事件监听器
 twitterBtn.addEventListener("click", newTweet);
