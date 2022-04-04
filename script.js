@@ -4,6 +4,8 @@ const authorText = document.querySelector('#author-text');
 const newQuoteBtn = document.querySelector('#new-quote');
 const twitterBtn = document.querySelector('#twitter');
 const loader = document.querySelector('#loader');
+const copyQuoteBtn = document.querySelector('#copy-quote');
+const copiedQuoteBtn = document.querySelector('#copied-quote');
 
 let errorCounter=0;
 let apiQuotes = [];
@@ -13,6 +15,7 @@ newYiyan();
 // 事件监听器
 twitterBtn.addEventListener("click", newTweet);
 newQuoteBtn.addEventListener("click",newYiyan);
+copyQuoteBtn.addEventListener("click",copyQuote);
 
 // ------------------------------
 // apiQutes随机选取并显示一条名人名言
@@ -82,12 +85,11 @@ async function newYiyan() {
       } else {
         quoteText.classList.remove("quote__text--long")
       }
-
       //成功写入
       authorText.textContent = quote.from_who + "《"+quote.from+"》";
       errorCounter=0;
       removeLoadingSpinner();
-
+      removeCopiedButton();
     } else {
       throw new Error(response.status);
     }
@@ -112,4 +114,25 @@ function showLoadingSpinner() {
 function removeLoadingSpinner() {
   loader.hidden = true;
   quoteContainer.hidden = false;
+}
+
+function showCopiedButton() {
+  copyQuoteBtn.hidden=true;
+  copiedQuoteBtn.hidden = false;
+}
+
+function removeCopiedButton() {
+  copyQuoteBtn.hidden = false;
+  copiedQuoteBtn.hidden = true;
+}
+
+function copyQuote() {
+  try {
+    showCopiedButton();
+    // Clipboard Api 实现写入剪贴板
+    const clipboard = navigator.clipboard;
+    clipboard.writeText(quoteText.textContent);
+  } catch(error) {
+    console.error('Failed to copy:',error);
+  }
 }

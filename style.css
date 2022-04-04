@@ -91,10 +91,13 @@ body {
   按钮部分
   =======
 */
-.quote__button {
+.quote__buttons {
   display: flex;
-  justify-content: space-between;
   margin-top: .5em;
+}
+
+.quote__buttons > button + button {
+  margin-left: .3em;
 }
 
 button {
@@ -117,6 +120,10 @@ button:active {
   box-shadow: 0 0.1rem var(--button-shadow);
 }
 
+#new-quote {
+  margin-left: auto;
+}
+
 .twitter-button:hover {
   color: #1d9bf0;
 }
@@ -129,6 +136,10 @@ button:active {
   .twitter-button:active {
     color: #1d9bf0;
   }
+}
+
+#copied-quote {
+  animation: shake .6s linear;
 }
 
 /* =======
@@ -152,5 +163,37 @@ button:active {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-0.2em);
+    /*向左移动元素*/
+  }
+
+  20%,
+  40%,
+  60% {
+    transform: translateX(0.2em);
+    /*向右移动元素*/
+  }
+
+  80% {
+    transform: translateX(0.1em);
+    /*最后一次降低幅度*/
+  }
+
+  90% {
+    transform: translateX(-0.1em);
   }
 }
