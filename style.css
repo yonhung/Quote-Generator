@@ -108,9 +108,11 @@ button {
   box-shadow: 0 0.3rem var(--button-shadow);
   text-shadow: 1px 1px var(--button-shadow);
   cursor: pointer;
+  user-select: none;
+  touch-action: none;
 }
 
-button:active {
+.button--active {
   transform: translateY(0.2rem);
   box-shadow: 0 0.1rem var(--button-shadow);
 }
