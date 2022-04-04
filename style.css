@@ -119,6 +119,16 @@ button:active {
   color: #1d9bf0;
 }
 
+/*手机端取消悬停样式*/
+@media (hover:none) {
+  .twitter-button:hover {
+    color: white;
+  }
+  .twitter-button:active {
+    color: #1d9bf0;
+  }
+}
+
 /* =======
    加载画面
    =======
