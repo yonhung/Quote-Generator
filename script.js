@@ -1,7 +1,9 @@
+const quoteContainer = document.querySelector('#quote-container');
 const quoteText = document.querySelector('#quote-text');
 const authorText = document.querySelector('#author-text');
 const newQuoteBtn = document.querySelector('#new-quote');
 const twitterBtn = document.querySelector('#twitter');
+const loader = document.querySelector('#loader');
 
 let apiQuotes = [];
 newYiyan();
@@ -62,26 +64,43 @@ function newTweet() {
 // --------------
 async function newYiyan() {
   try {
+    loading();
     const response = await fetch("https://v1.hitokoto.cn?c=d&c=h&c=i");
     if (response.ok) {
       const quote = await response.json();
       
       quoteText.textContent = quote.hitokoto;
-      // 检查作者是否为空，如果是替换成署名
+      // 检查作者是否为空，如果是替换成名
       if(!quote.from_who) {
-        quote.from_who = '';
+        quote.from_who = '佚名';
       }
-      authorText.textContent = quote.from_who + "《"+quote.from+"》";
+      
       // 过长的文字缩小字号
       if (quote.hitokoto.length > 80) {
         quoteText.classList.add("quote__text--long");
       } else {
         quoteText.classList.remove("quote__text--long")
       }
+
+      authorText.textContent = quote.from_who + "《"+quote.from+"》";
+      complete();
     } else {
       throw new Error(response.status);
     }
   } catch (e) {
     console.log(e);
   }
+}
+
+// =======
+// 等待画面
+// =======
+function loading() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+function complete() {
+  loader.hidden = true;
+  quoteContainer.hidden = false;
 }

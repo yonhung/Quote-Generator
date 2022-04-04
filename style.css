@@ -118,3 +118,27 @@ button:active {
 .twitter-button:hover {
   color: #1d9bf0;
 }
+
+/* =======
+   加载画面
+   =======
+*/
+.loader {
+  font-size: .8rem;
+  width: 8em;
+  height: 8em;
+  border: 1em solid rgb(209, 209, 209);
+  border-top: 1em solid var(--button-color);
+  border-radius: 50%;
+  animation: loading 1s linear infinite;
+  /* background-color:black; */
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
