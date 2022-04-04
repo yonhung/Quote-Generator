@@ -112,7 +112,7 @@ button {
   touch-action: none;
 }
 
-.button--active {
+button:active {
   transform: translateY(0.2rem);
   box-shadow: 0 0.1rem var(--button-shadow);
 }

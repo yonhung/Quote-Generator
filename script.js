@@ -10,8 +10,8 @@ newYiyan();
 // getQuotes();
 
 // 事件监听器
-twitterBtn.addEventListener("pointerdown", getPointerHandler(newTweet));
-newQuoteBtn.addEventListener("pointerdown",getPointerHandler(newYiyan));
+twitterBtn.addEventListener("click", newTweet);
+newQuoteBtn.addEventListener("click",newYiyan);
 
 // ------------------------------
 // apiQutes随机选取并显示一条名人名言
@@ -89,21 +89,6 @@ async function newYiyan() {
     }
   } catch (e) {
     console.log(e);
-  }
-}
-
-// ==============
-// 绑定按钮上的指针
-// ==============
-function getPointerHandler(callback) {
-  return function(event) {
-    this.classList.add("button--active");
-    this.setPointerCapture(event.pointerId);
-    this.onpointerup= () => {
-      this.classList.remove("button--active");
-      this.onpointerup = null;
-      callback();
-    }
   }
 }
 
