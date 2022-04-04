@@ -85,6 +85,9 @@ async function newYiyan() {
       } else {
         quoteText.classList.remove("quote__text--long")
       }
+
+      //格式化名人名言
+      quote.from = quote.from.replace(/[《》]/g,'');
       //成功写入
       authorText.textContent = quote.from_who + "《"+quote.from+"》";
       errorCounter=0;
