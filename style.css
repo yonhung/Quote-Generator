@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-size: calc(0.5em + 0.8vw);
   --button-color:#383838;
-  --button-shadow:#505050;
+  --button-shadow:#575757;
 }
 
 *,
@@ -119,6 +119,15 @@ button:active {
   color: #1d9bf0;
 }
 
+/*手机端取消悬停样式*/
+@media (hover:none) {
+  .twitter-button:hover {
+    color: white;
+  }
+  .twitter-button:active {
+    color: #1d9bf0;
+  }
+}
 /* =======
    加载画面
    =======
