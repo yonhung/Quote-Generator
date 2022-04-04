@@ -6,12 +6,11 @@ const twitterBtn = document.querySelector('#twitter');
 const loader = document.querySelector('#loader');
 
 let apiQuotes = [];
-newYiyan();
-// getQuotes();
+getQuotes();
 
 // 事件监听器
 twitterBtn.addEventListener("click", newTweet);
-newQuoteBtn.addEventListener("click", newYiyan);
+newQuoteBtn.addEventListener("click", newQuote);
 
 // ------------------------------
 // apiQutes随机选取并显示一条名人名言
@@ -39,9 +38,12 @@ function newQuote() {
 // ----------------------------------
 async function getQuotes() {
   try {
+    loading();
     const response = await fetch("https://quotable.io/quotes?page=1&limit=150");
     if (response.ok) {
       apiQuotes = (await response.json()).results;
+      complete();
+      newQuote();
     } else {
       throw new Error(response.status)
     }
@@ -57,39 +59,6 @@ function newTweet() {
   let twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} 
   --- ${authorText.textContent}`;
   window.open(encodeURI(twitterUrl), "_blank");
-}
-
-// --------------
-// 获取一言随机名言
-// --------------
-async function newYiyan() {
-  try {
-    loading();
-    const response = await fetch("https://v1.hitokoto.cn?c=d&c=h&c=i");
-    if (response.ok) {
-      const quote = await response.json();
-      
-      quoteText.textContent = quote.hitokoto;
-      // 检查作者是否为空，如果是替换成名
-      if(!quote.from_who) {
-        quote.from_who = '佚名';
-      }
-      
-      // 过长的文字缩小字号
-      if (quote.hitokoto.length > 80) {
-        quoteText.classList.add("quote__text--long");
-      } else {
-        quoteText.classList.remove("quote__text--long")
-      }
-
-      authorText.textContent = quote.from_who + "《"+quote.from+"》";
-      complete();
-    } else {
-      throw new Error(response.status);
-    }
-  } catch (e) {
-    console.log(e);
-  }
 }
 
 // =======
